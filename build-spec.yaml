@@ -1,0 +1,22 @@
+version: "1.0"
+
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Docker Hub"
+      - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+  build:
+    commands:
+      - echo "Building the Docker image"
+      - docker build -t varshatraining2006/k-demo-web:latest .
+  post_build:
+    commands:
+      - echo "Pushing the Docker image to Docker Hub"
+      - docker push varshatraining2006/k-demo-web:latest
+
+env:
+  secrets:
+    - name: DOCKER_USERNAME
+      secretId: ocid1.vaultsecret.oc1.ap-hyderabad-1.amaaaaaacugeyfya6wd557a744nwqpgevj4bu4svojo7xnzw6zssxxpozdzq
+    - name: DOCKER_PASSWORD
+      secretId: ocid1.vaultsecret.oc1.ap-hyderabad-1.amaaaaaacugeyfyamldukix2wjus3mk7mwlf5xjhtfnwwiopllzyum3kqula
