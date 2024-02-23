@@ -1,35 +1,17 @@
 pipeline {
-    environment {
-    registry = "rpdharanidhar/web"
-    registryCredential = 'dockerhub'
-    }
     agent any
 
     stages {
-        stage('Cloning the Git') {
+        stage('Checkout') {
             steps {
                 git url: 'https://github.com/rpdharanidhar/demo.git', branch: 'main', credentialsId: 'git-credential'
             }
         }
 
-        stage('Build the Docker images') {
-            steps{
-                script {
-                    docker.build registry + ":$BUILD_NUMBER"
-                }
-
-
+        stage('Example stage 1') {
+            environment {
+                BITBUCKET_COMMON_CREDS = credentials('jenkins-bitbucket-common-creds')
             }
-        }
-
-        stage('Deploy the built Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
+            steps
     }
 }
