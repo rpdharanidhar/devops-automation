@@ -1,17 +1,34 @@
 pipeline {
+    environment {
+    registry = "rpdharanidhar/web"
+    registryCredential = 'dockerhub'
+    }
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Cloning the Git') {
             steps {
                 git url: 'https://github.com/rpdharanidhar/demo.git', branch: 'main', credentialsId: 'git-credential'
             }
         }
 
-        stage('Copy to Nginx root') {
-            steps {
-                // Copying webcontent in to remote server
-                sh 'scp -r *  azureadmin@13.95.151.203:/var/www/html/'
+        stage('Build the Docker images') {
+            steps{
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
+
+
+            }
+        }
+
+        stage('Deploy the built Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
             }
         }
     }
