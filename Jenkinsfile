@@ -17,7 +17,6 @@ pipeline {
             steps {
                 script {
                     docker.image("testdemo1-jenkins").run("-p 8080:8080")
-                    }
                 }
             }
         }
