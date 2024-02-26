@@ -82,7 +82,7 @@ pipeline {
             }
         }
         failure {
-            mail to: dharanirp2002@gmail.com, subject: 'The Pipeline failed :('
+            mail to: 'dharanirp2002@gmail.com', subject: 'The Pipeline failed :('
         }
     }
 }
