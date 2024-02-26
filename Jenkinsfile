@@ -5,9 +5,6 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
         DOCKER_IMAGE_NAME = "testdemo-jenkins"
         DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
-        DOCKER_USERNAME = "rpdharanidhar"
-        DOCKER_PASSWORD = "Dharanirp@1482"
-        
     }
     
     stages {
