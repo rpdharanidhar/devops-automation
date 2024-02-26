@@ -52,11 +52,23 @@ pipeline {
                 }
             }
         }
+        // stage('Run Docker Container') {
+        //     steps {
+        //         script {
+        //             //docker.image("testdemo-jenkins").run("-p 8080:8080")
+        //             sh 'docker run --name "${DOCKER_IMAGE_NAME}" -p 8080:80 -d nginx'
+        //         }
+        //     }
+        // }
         stage('Run Docker Container') {
             steps {
                 script {
-                    //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    sh 'docker run --name testdemo-jenkins -p 8080:80 -d nginx'
+                    // Run a Docker container from the built image
+                    def dockerContainer = docker.image("${DOCKER_IMAGE_NAME}").run('-d')
+                    // Get the container ID
+                    def containerId = dockerContainer.id
+                    // Print the container ID
+                    println "Docker container ID: ${containerId}"
                 }
             }
         }
