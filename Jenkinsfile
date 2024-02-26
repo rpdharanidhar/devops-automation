@@ -82,9 +82,9 @@ pipeline {
             }
         }
     }
-    post {
-        failure {
-            mailto: 'dharanirp2002@gmail.com', subject: 'The Pipeline failed :('
-        }
-    }
+    // post{
+    //     failure {
+    //         mailto: 'dharanirp2002@gmail.com', subject: 'The Pipeline failed :('
+    //     }
+    // }
 }
