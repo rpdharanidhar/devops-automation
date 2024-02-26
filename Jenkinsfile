@@ -9,10 +9,20 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("testdemo1-jenkins")
+                     sh 'docker build -t rpdharanidhar/devops-integration .'
                 }
             }
         }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                   withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+                   sh 'docker login -u rpdharanidhar -p ${dockerhub}'
+                   sh 'docker push rpdharanidhar/devops-integration'
+                }
+            }
+        }
+    }
         stage('Run Docker Container') {
             steps {
                 script {
