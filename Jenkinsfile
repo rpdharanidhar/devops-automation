@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    sh 'docker run -p 8080:80 testdemo-jenkins'
+                    sh 'docker run --name testdemo-jenkins -p 8080:80 -d nginx'
                 }
             }
         }
