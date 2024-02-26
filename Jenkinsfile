@@ -26,7 +26,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    docker.image("testdemo1-jenkins").run("-p 8080:8080")
+                    docker.image("devops-integration").run("-p 8080:8080")
                 }
             }
         }
