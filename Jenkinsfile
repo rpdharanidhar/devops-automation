@@ -23,7 +23,8 @@ pipeline {
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
                         withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        docker.withRegistry('env.DOCKER_REGISTRY', 'env.DOCKER_USERNAME', 'env.DOCKER_PASSWORD')
+                            docker.withRegistry('env.DOCKER_REGISTRY', 'env.DOCKER_USERNAME', 'env.DOCKER_PASSWORD')
+                        }
                     }
                 }
             }
