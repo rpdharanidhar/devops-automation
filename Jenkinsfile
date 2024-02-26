@@ -1,8 +1,5 @@
 pipeline {
     agent any
-            environment {
-            registry = "rpdharanidhar/web"
-            registryCredential = 'dockerhub'
     stages {
         stage('Checkout') {
             steps {
