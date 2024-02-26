@@ -16,7 +16,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry('docker pull rpdharanidhar/devops-integration:latest', "${docker-hub-credentials-id}") {
+                    docker.withRegistry('rpdharanidhar/devops-integration:latest', "${docker-hub-credentials-id}") {
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
                         // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
@@ -51,7 +51,7 @@ pipeline {
         stage('Push Docker Image to Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${docker-hub-credentials-id}") {
+                    docker.withRegistry('rpdharanidhar/devops-integration:latest', "${docker-hub-credentials-id}") {
                         docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                         docker.image("${DOCKER_IMAGE_NAME}").push("latest")
                     }
