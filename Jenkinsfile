@@ -2,9 +2,12 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+        DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
         DOCKER_IMAGE_NAME = "testdemo-jenkins"
         DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
+        DOCKER_USERNAME = "rpdharanidhar"
+        DOCKER_PASSWORD = "Dharanirp@1482"
+        
     }
     
     stages {
@@ -16,9 +19,11 @@ pipeline {
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${docker-hub-credentials-id}") {
+                    docker.withRegistry('https://login.docker.com/u/login/identifier?state=hKFo2SAtM1RUcWc0WTAwRTBUUGlyZnRsMW1yeGF1TWx6akxYUqFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHcyZHI2bzVNSFhYQ3l6WVctMHR6N25tZEg0RXJya04to2NpZNkgbHZlOUdHbDhKdFNVcm5lUTFFVnVDMGxiakhkaTluYjk', "${docker-hub-credentials-id}") {
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
+                        withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        docker.withRegistry('env.DOCKER_REGISTRY', 'env.DOCKER_USERNAME', 'env.DOCKER_PASSWORD')
                     }
                 }
             }
