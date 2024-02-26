@@ -22,8 +22,11 @@ pipeline {
                     docker.withRegistry('docker pull rpdharanidhar/devops-integration:latest', "${docker-hub-credentials-id}") {
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
-                        withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                            docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_USERNAME, env.DOCKER_PASSWORD)
+                        // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            // docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_USERNAME, env.DOCKER_PASSWORD)
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        
                         }
                     }
                 }
