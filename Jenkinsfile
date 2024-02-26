@@ -1,25 +1,53 @@
 pipeline {
     agent any
+    
+    environment {
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+        DOCKER_IMAGE_NAME = "testdemo-jenkins"
+        DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
+
+    
     stages {
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'polar-git-credentials'
             }
         }
-        stage('Build Docker Image') {
+        stage('Docker Login') {
             steps {
                 script {
-                     sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
+                    docker.withRegistry('https://index.docker.io/v1/', "${docker-hub-credentials-id}") {
+                        // This block is authenticated with Docker Hub.
+                        // You can now pull/push images to Docker Hub.
+                    }
                 }
             }
         }
-        stage('Push image to Hub'){
-            steps{
-                script{
-                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
-                    sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
-                    sh 'docker login -u rpdharanidhar -p ${dockerhub}'
-                    sh 'docker push rpdharanidhar/devops-integration:latest'
+        stage('Build Docker Image') {
+            steps {
+                script { 
+                     //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
+                    docker.build("${DOCKER_IMAGE_NAME}")
+                }
+            }
+        }
+        // stage('Push image to Hub'){
+        //     steps{
+        //         script{
+        //             withCredentials([string(credentialsId: 'docker-hub-credentials-id', variable: 'docker-hub-credentials-id')]) {
+        //             sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
+        //             sh 'docker login -u rpdharanidhar -p ${docker-hub-credentials-id}'
+        //             sh 'docker push rpdharanidhar/devops-integration:latest'
+        //             }
+        //         }
+        //     }
+        // }
+        stage('Push Docker Image to Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', "${docker-hub-credentials-id}") {
+                        docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                        docker.image("${DOCKER_IMAGE_NAME}").push("latest")
                     }
                 }
             }
