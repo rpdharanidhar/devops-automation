@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/rpdharanidhar/demo.git', branch: 'main', credentialsId: 'git-credential'
+                git url: 'https://github.com/rpdharanidhar/demo.git'
             }
         }
         stage('Build Docker Image') {
