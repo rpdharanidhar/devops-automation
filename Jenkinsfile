@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/rpdharanidhar/demo.git'
+                git url: 'https://github.com/rpdharanidhar/devops-automation.git'
             }
         }
         stage('Build Docker Image') {
@@ -20,9 +20,9 @@ pipeline {
             steps {
                 script {
                     docker.image("testdemo1-jenkins").run("-p 8080:8080")
+                    }
                 }
             }
-        }
         }
     }
 }
