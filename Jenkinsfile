@@ -1,11 +1,11 @@
 pipeline {
     agent any
    
-    environment {
-        DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
-        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
-        DOCKER_HUB_REPO = "rpdharanidhar"
-    }
+    // environment {
+    //     DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
+    //     DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
+    //     DOCKER_HUB_REPO = "rpdharanidhar"
+    // }
    
     stages {
         stage('Checkout') {
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    docker.build("${DOCKER_IMAGE_NAME}")
+                    docker.build("rpdharanidhar/devops-integration")
                 }
             }
         }
@@ -48,16 +48,16 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Push Docker Image to Hub') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
-                       // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
-                        docker.image("${DOCKER_IMAGE_NAME}:latest").push()
-                    }
-                }
-            }
-        }
+        // stage('Push Docker Image to Hub') {
+        //     steps {
+        //         script {
+        //             docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
+        //                // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+        //                 docker.image("${DOCKER_IMAGE_NAME}:latest").push()
+        //             }
+        //         }
+        //     }
+        // }
         // stage('Run Docker Container') {
         //     steps {
         //         script {
