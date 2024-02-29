@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
-        DOCKER_IMAGE_NAME = "testdemo-jenkins"
+        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration:latest"
         DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
     }
     
