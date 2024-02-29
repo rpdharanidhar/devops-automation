@@ -1,12 +1,12 @@
 pipeline {
     agent any
-    
+   
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
-        DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
+        DOCKER_HUB_REPO = "rpdharanidhar"
     }
-    
+   
     stages {
         stage('Checkout') {
             steps {
@@ -16,12 +16,12 @@ pipeline {
         // stage('Docker Login') {
         //     steps {
         //         script {
-        //             docker.withRegistry('https://registry-1.docker.io/v2/', "${docker-hub-credentials-id}") {
+        //             docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
         //                 // This block is authenticated with Docker Hub.
         //                 // You can now pull/push images to Docker Hub.
         //                 // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
         //                     // docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_USERNAME, env.DOCKER_PASSWORD)
-        //                 withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDENTIALS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+        //                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
         //                     sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
         //                 // sh "docker login"
         //                 }
@@ -31,10 +31,9 @@ pipeline {
         // }
         stage('Build Docker Image') {
             steps {
-                script { 
-                    sh 'docker build -t testdemo-jenkins" 
-                    // https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    // docker.build("${DOCKER_IMAGE_NAME}")
+                script {
+                     //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
+                    docker.build("${DOCKER_IMAGE_NAME}")
                 }
             }
         }
@@ -52,8 +51,8 @@ pipeline {
         stage('Push Docker Image to Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://registry-1.docker.io/v2/', "${DOCKER_CREDENTIALS}") {
-                        docker.image("${DOCKER_IMAGE_NAME}:latest").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
+                       // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                         docker.image("${DOCKER_IMAGE_NAME}:latest").push()
                     }
                 }
@@ -67,18 +66,18 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    // Run a Docker container from the built image
-                    def dockerContainer = docker.image("${DOCKER_IMAGE_NAME}").run('-d')
-                    // Get the container ID
-                    def containerId = dockerContainer.id
-                    // Print the container ID
-                    println "Docker container ID: ${containerId}"
-                }
-            }
-        }
+        // // stage('Run Docker Container') {
+        // //     steps {
+        // //         script {
+        // //             // Run a Docker container from the built image
+        // //             def dockerContainer = docker.image("${DOCKER_IMAGE_NAME}").run('-d')
+        // //             // Get the container ID
+        // //             def containerId = dockerContainer.id
+        // //             // Print the container ID
+        // //             println "Docker container ID: ${containerId}"
+        // //         }
+        // //     }
+        // // }
     }
     // post{
     //     failure {
