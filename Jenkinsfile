@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
-        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration:latest"
+        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar/devops-integration"
     }
     
@@ -32,8 +32,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script { 
-                     //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    docker.build("${DOCKER_IMAGE_NAME}")
+                    sh 'docker build -t testdemo-jenkins" 
+                    // https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
+                    // docker.build("${DOCKER_IMAGE_NAME}")
                 }
             }
         }
@@ -52,7 +53,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry-1.docker.io/v2/', "${DOCKER_CREDENTIALS}") {
-                        docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                        docker.image("${DOCKER_IMAGE_NAME}:latest").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                         docker.image("${DOCKER_IMAGE_NAME}:latest").push()
                     }
                 }
