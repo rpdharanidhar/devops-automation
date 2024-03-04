@@ -123,11 +123,11 @@ pipeline {
                 
             }
         }
-        post{
-            failure {
-                mailto:dharanirp2002@gmail.com, subject: 'The Pipeline failed :( at the Run Docker Container:('
-            }
-        }
+        // post{
+        //     failure {
+        //         mailto: 'dharanirp2002@gmail.com', subject: 'The Pipeline failed :( at the Run Docker Container:('
+        //     }
+        // }
         stage('Run Docker Container') {
             steps {
                 // script {
@@ -136,6 +136,7 @@ pipeline {
                 //     // rpdharanidhar/devops-integration:latest
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
+                bat 'docker stop rpdharanidhar/devops-integration:latest'
                 bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration:latest'
             }
         }
