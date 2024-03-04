@@ -12,10 +12,7 @@ pipeline {
     //     AZURE_VM_USERNAME = 'admin'
     //     AZURE_VM_PRIVATE_KEY = credentialsId('azure-vm')
     // }
-    environment {
-        DOCKER_REGISTRY_CREDENTIALS = credentials('dockerhub-registry')
-    }
-   
+    
     stages {
         // stage('Connect to Azure VM') {
         //     steps {
@@ -45,7 +42,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration:latest', DOCKER_REGISTRY_CREDENTIALS) {
+                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration:latest', credentials: 'dockerhub-registry') {
                         docker.image('rpdharanidhar/devops-integration').push('latest')
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
