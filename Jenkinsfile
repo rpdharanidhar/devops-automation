@@ -113,8 +113,9 @@ pipeline {
                 // // bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io'
                 // // bat 'docker push rpdharanidhar/devops-integration'
                 // }
+                bat 'docker build -t v1.0 .'
                 bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
-                bat 'docker push rpdharanidhar/devops-integration:latest'
+                bat 'docker push rpdharanidhar/devops-integration:v1.0'
             }
         }
         stage('Run Docker Container') {
