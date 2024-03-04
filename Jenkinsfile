@@ -39,27 +39,28 @@ pipeline {
                 git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'git-credentials'
             }
         }
-        // stage('Docker Login') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
-        //                 // This block is authenticated with Docker Hub.
-        //                 // You can now pull/push images to Docker Hub.
-        //                 // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //                     // docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_USERNAME, env.DOCKER_PASSWORD)
-        //                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-        //                     sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-        //                 // sh "docker login"
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Docker Login') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', dockerhub-registry) {
+                        docker.image('rpdharanidhar/devops-integration').push('latest')
+                        // This block is authenticated with Docker Hub.
+                        // You can now pull/push images to Docker Hub.
+                        // withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            // docker.withRegistry(env.DOCKER_REGISTRY, env.DOCKER_USERNAME, env.DOCKER_PASSWORD)
+                        // withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            // sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                        // sh "docker login"
+                        }
+                    }
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    docker.build("rpdharanidhar/devops-integration:latest")
+                    docker.build("rpdharanidhar/devops-integration")
                 }
             }
         }
