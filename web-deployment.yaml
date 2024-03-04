@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rpdharanidhar/web:latest
+        image: rpdharanidhar/devops-integration:latest
         ports:
         - containerPort: 80
 
