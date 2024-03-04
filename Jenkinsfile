@@ -131,7 +131,7 @@ pipeline {
                 //     // rpdharanidhar/devops-integration:latest
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
-                bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration'
+                bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration:latest'
             }
         }
         // // stage('Run Docker Container') {
