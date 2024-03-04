@@ -68,27 +68,28 @@ pipeline {
                 }
             }
         }
-        stage('Push image to Hub'){
-            steps{
-                script{
-                    withCredentials([string(credentials: 'dockerhub', variable: 'dockerhub')]) {
-                    sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
-                    sh 'docker login -u rpdharanidhar -p ${docker-pass-txt}'
-                    sh 'docker push rpdharanidhar/devops-integration:latest'
-                    }
-                }
-            }
-        }
-        // stage('Push Docker Image to Hub') {
-        //     steps {
-        //         script {
-        //             docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS}") {
-        //                // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
-        //                 docker.image("${DOCKER_IMAGE_NAME}:latest").push()
+        // stage('Push image to Hub'){
+        //     steps{
+        //         script{
+        //             withCredentials([string(credentials: 'dockerhub', variable: 'dockerhub')]) {
+        //             sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
+        //             sh 'docker login -u rpdharanidhar -p ${docker-pass-txt}'
+        //             sh 'docker push rpdharanidhar/devops-integration:latest'
         //             }
         //         }
         //     }
         // }
+        stage('Push Docker Image to Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration/', dockerhub){
+                    // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
+                       // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                        docker.image('rpdharanidhar/devops-integration').push('latest')
+                    }
+                }
+            }
+        }
         stage('Run Docker Container') {
             steps {
                 script {
