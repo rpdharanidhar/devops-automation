@@ -127,7 +127,7 @@ pipeline {
             steps {
                 script {
                     //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    sh 'docker run --name rpdharanidhar/devops-integration -p 8080:80 -d nginx'
+                    sh 'docker run -d --name rpdharanidhar/devops-integration:latest -p 8080:80'
                 }
             }
         }
