@@ -12,6 +12,10 @@ pipeline {
     //     AZURE_VM_USERNAME = 'admin'
     //     AZURE_VM_PRIVATE_KEY = credentialsId('azure-vm')
     // }
+    environment {
+        DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
+        KUBE_NAMESPACE = 'jenkinsdemo-kube'
+    }
     
     stages {
         // stage('Connect to Azure VM') {
@@ -85,14 +89,14 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('Run Docker Container') {
-        //     steps {
-        //         script {
-        //             //docker.image("testdemo-jenkins").run("-p 8080:8080")
-        //             sh 'docker run --name "${DOCKER_IMAGE_NAME}" -p 8080:80 -d nginx'
-        //         }
-        //     }
-        // }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    //docker.image("testdemo-jenkins").run("-p 8080:8080")
+                    sh 'docker run --name rpdharanidhar/devops-integration -p 8080:80 -d nginx'
+                }
+            }
+        }
         // // stage('Run Docker Container') {
         // //     steps {
         // //         script {
@@ -105,6 +109,20 @@ pipeline {
         // //         }
         // //     }
         // // }
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Deploy your Docker image to Kubernetes
+                    kubernetesDeploy(
+                        kubeconfigId: 'your-kubeconfig-credentials-id',
+                        configs: 'web-deployment.yaml',
+                        enableConfigSubstitution: true,
+                        showInline: true,
+                        namespace: jenkinsdemo-kube
+                    )
+                }
+            }
+        }
     }
     // post{
     //     failure {
