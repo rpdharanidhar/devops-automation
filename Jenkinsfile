@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'polar-git-credentials'
+                git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'git-credentials'
             }
         }
         // stage('Docker Login') {
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    docker.build("rpdharanidhar/devops-integration")
+                    docker.build("rpdharanidhar/devops-integration:latest")
                 }
             }
         }
