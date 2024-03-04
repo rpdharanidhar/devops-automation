@@ -66,7 +66,7 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+                    withCredentials([string(credentials: 'dockerhub', variable: 'dockerhub')]) {
                     sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
                     sh 'docker login -u rpdharanidhar -p ${docker-pass-txt}'
                     sh 'docker push rpdharanidhar/devops-integration:latest'
