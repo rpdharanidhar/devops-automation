@@ -125,10 +125,13 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                script {
-                    //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    sh 'docker run -d --name rpdharanidhar/devops-integration:latest -p 8080:80'
-                }
+                // script {
+                //     //docker.image("testdemo-jenkins").run("-p 8080:8080")
+                //     sh 'docker run -d --name rpdharanidhar/devops-integration:latest -p 8080:80'
+                //     // rpdharanidhar/devops-integration:latest
+                //     // sh "docker run -d --name ${containerName} ${imageName}"
+                // }
+                bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration'
             }
         }
         // // stage('Run Docker Container') {
