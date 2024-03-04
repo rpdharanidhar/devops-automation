@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
     }
-   
+    
     stages {
         stage('Checkout') {
             steps {
