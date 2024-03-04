@@ -110,7 +110,7 @@ pipeline {
                 //         docker.image('rpdharanidhar/devops-integration').push('latest')
                 //     }
                 // }
-                bat 'docker push rpdharanidhar/devops-integration'
+                bat 'docker push rpdharanidhar/devops-integration:v1.0'
             }
         }
         stage('Run Docker Container') {
