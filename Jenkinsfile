@@ -90,11 +90,11 @@ pipeline {
         //         bat 'docker login -u rpdharanidhar -p ${docker-pass-txt} ${env.DOCKER_REGISTRY}'
         //     }
         // }
-        steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY'
-                }
+        steps{
+            withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY'
             }
+        }
         stage('Push Docker Image to Hub') {
             steps {
                 script {
