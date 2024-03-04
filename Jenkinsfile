@@ -115,6 +115,9 @@ pipeline {
                 // }
                 bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
                 bat 'docker build -t latest .'
+                bat 'docker tag devops-integration devops-integration:latest'
+                bat 'docker push devops-integration:latest'
+
                 bat 'docker push rpdharanidhar/devops-integration:latest'
             }
         }
