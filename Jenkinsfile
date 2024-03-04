@@ -1,16 +1,16 @@
 pipeline {
     agent any
    
-    environment {
+    // environment {
     //     DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
-        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
-        DOCKER_HUB_REPO = "rpdharanidhar"
-    }
-    
+    //     DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
+    //     DOCKER_HUB_REPO = "rpdharanidhar"
+    // }
+   
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'git-credentials'
+                git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'polar-git-credentials'
             }
         }
         // stage('Docker Login') {
@@ -33,9 +33,7 @@ pipeline {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    docker.build('rpdharanidhar/devops-integration:latest', '-f dockerfile .')
-                    // docker.build('my-docker-image', '-f ' + dockerfile + ' .')
-                    docker.build("${DOCKER_IMAGE_NAME}")
+                    docker.build("rpdharanidhar/devops-integration")
                 }
             }
         }
