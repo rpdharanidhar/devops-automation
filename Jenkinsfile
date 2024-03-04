@@ -19,7 +19,7 @@ pipeline {
         DOCKER_PASSWORD = 'dharanirp1482'
         // DOCKER_USERNAME = credentials("docker-username-txt")
         DOCKER_USERNAME = 'rpdharanidhar'
-        DOCKER_CREDENTIALS = credentials('dockerhub')
+        // DOCKER_CREDENTIALS = credentialsId('dockerhub')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
         DOCKER_REGISTRY = 'docker.io/rpdharanidhar/devops-integration/'
