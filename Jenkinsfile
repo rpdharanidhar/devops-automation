@@ -109,8 +109,9 @@ pipeline {
                 //        // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                         docker.image('rpdharanidhar/devops-integration').push('latest')
                 //     }
-                }
+                    }
                 // bat 'docker push rpdharanidhar/devops-integration'
+                }
             }
         }
         stage('Run Docker Container') {
