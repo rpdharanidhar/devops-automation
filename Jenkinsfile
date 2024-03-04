@@ -118,8 +118,9 @@ pipeline {
                 // bat 'docker build -t latest .'
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
-                bat "docker login -u rpdharanidhar -p dharanirp1482 && docker push devops-integration:latest"
+                bat "docker login -u rpdharanidhar -p dharanirp1482 && docker tag devops-integration rpdharanidhar/devops-integration && docker push rpdharanidhar/devops-integration:latest"
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
+                
             }
         }
         stage('Run Docker Container') {
