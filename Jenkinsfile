@@ -45,7 +45,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS) {
+                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration:latest', DOCKER_REGISTRY_CREDENTIALS) {
                         docker.image('rpdharanidhar/devops-integration').push('latest')
                         // This block is authenticated with Docker Hub.
                         // You can now pull/push images to Docker Hub.
