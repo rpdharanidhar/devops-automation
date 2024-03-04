@@ -6,8 +6,26 @@ pipeline {
     //     DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
     //     DOCKER_HUB_REPO = "rpdharanidhar"
     // }
+    environment {
+        // Define the Azure VM details
+        AZURE_VM_IP = '172.208.57.242'
+        AZURE_VM_USERNAME = 'admin'
+        AZURE_VM_PRIVATE_KEY = credentials('azure-vm')
+    }
    
     stages {
+        stage('Connect to Azure VM') {
+            steps {
+                script {
+                    // Start the SSH agent and add the private key
+                    sshagent(['azure-vm']) {
+                        // Use SSH to connect to the Azure VM and execute a command
+                        sshCommand remote: "ubuntu@${172.208.57.242}", command: 'echo Hello from Jenkins'
+                    }
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'git-credentials'
