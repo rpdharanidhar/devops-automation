@@ -103,13 +103,14 @@ pipeline {
         }
         stage('Push Docker Image to Hub') {
             steps {
-                script {
-                    docker.withRegistry('http://localhost:54686/', dockerhub){
-                    // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
-                       // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
-                        docker.image('rpdharanidhar/devops-integration').push('latest')
-                    }
-                }
+                // script {
+                //     docker.withRegistry('docker.io/rpdharanidhar/devops-integration'){
+                //     // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
+                //        // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                //         docker.image('rpdharanidhar/devops-integration').push('latest')
+                //     }
+                // }
+                bat 'docker push rpdharanidhar/devops-integration'
             }
         }
         stage('Run Docker Container') {
