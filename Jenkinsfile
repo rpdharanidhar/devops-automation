@@ -103,14 +103,14 @@ pipeline {
         }
         stage('Push Docker Image to Hub') {
             steps {
-                script {
-                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration/', dockerhub){
-                //     // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
-                //        // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
-                        docker.image('rpdharanidhar/devops-integration:latest').push()
+                // script {
+                //     docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration/', dockerhub){
+                // //     // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
+                // //        // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
+                //         docker.image('rpdharanidhar/devops-integration:latest').push()
+                // //     }
                 //     }
-                    }
-                }
+                // }
                 // // bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io'
                 // // bat 'docker push rpdharanidhar/devops-integration'
                 // }
@@ -118,7 +118,7 @@ pipeline {
                 // bat 'docker build -t latest .'
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
-
+                bat "docker login -u rpdharanidhar -p dharanirp1482 && docker push devops-integration:latest"
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
             }
         }
