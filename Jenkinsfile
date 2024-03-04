@@ -2,7 +2,7 @@ pipeline {
     agent any
    
     // environment {
-    //     DOCKER_CREDENTIALS = credentials('docker-hub-credentials-id')
+    //     DOCKER_CREDENTIALS = credentials('dockerhub')
     //     DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
     //     DOCKER_HUB_REPO = "rpdharanidhar"
     // }
@@ -37,17 +37,17 @@ pipeline {
                 }
             }
         }
-        // stage('Push image to Hub'){
-        //     steps{
-        //         script{
-        //             withCredentials([string(credentialsId: 'docker-hub-credentials-id', variable: 'docker-hub-credentials-id')]) {
-        //             sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
-        //             sh 'docker login -u rpdharanidhar -p ${docker-hub-credentials-id}'
-        //             sh 'docker push rpdharanidhar/devops-integration:latest'
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+                    sh 'docker tag testdemo-jenkins rpdharanidhar/devops-integration:latest'
+                    sh 'docker login -u rpdharanidhar -p ${docker-pass-txt}'
+                    sh 'docker push rpdharanidhar/devops-integration:latest'
+                    }
+                }
+            }
+        }
         // stage('Push Docker Image to Hub') {
         //     steps {
         //         script {
