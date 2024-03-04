@@ -20,7 +20,7 @@ pipeline {
                     // Start the SSH agent and add the private key
                     sshagent(['azure-vm']) {
                         // Use SSH to connect to the Azure VM and execute a command
-                        sshCommand remote: "ubuntu@${172.208.57.242}", command: 'echo Hello from Jenkins'
+                        sshCommand remote: "ubuntu@${AZURE_VM_IP}", command: 'echo Hello from Jenkins'
                     }
                 }
             }
