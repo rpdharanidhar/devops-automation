@@ -125,7 +125,7 @@ pipeline {
         }
         post{
             failure {
-                mailto: 'dharanirp2002@gmail.com', subject: 'The Pipeline failed :( at the Run Docker Container:('
+                mailto:dharanirp2002@gmail.com, subject: 'The Pipeline failed :( at the Run Docker Container:('
             }
         }
         stage('Run Docker Container') {
