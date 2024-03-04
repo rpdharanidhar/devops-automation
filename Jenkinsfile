@@ -14,18 +14,18 @@ pipeline {
     }
    
     stages {
-        stage('Connect to Azure VM') {
-            steps {
-                script {
-                    // Start the SSH agent and add the private key
-                    // sshagent(['azure-vm']) {
-                        // Use SSH to connect to the Azure VM and execute a command
-                        // sshCommand remote: "ubuntu@${AZURE_VM_IP}", command: 'echo Hello from Jenkins'
-                    sh 'scp -r *  azureadmin@172.208.57.242:/var/www/html/', credentialsId: 'azure-vm-pass'
+        // stage('Connect to Azure VM') {
+        //     steps {
+        //         script {
+        //             // Start the SSH agent and add the private key
+        //             // sshagent(['azure-vm']) {
+        //                 // Use SSH to connect to the Azure VM and execute a command
+        //                 // sshCommand remote: "ubuntu@${AZURE_VM_IP}", command: 'echo Hello from Jenkins'
+        //             sh 'scp -r *  azureadmin@172.208.57.242:/var/www/html/', credentialsId: 'azure-vm-pass'
                     
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
         // stage('azure vm connect') {
         //     steps {
         //         sh 'az login --service-principal -u $AZURE_VM_USERNAME -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
