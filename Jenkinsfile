@@ -22,7 +22,8 @@ pipeline {
         // DOCKER_CREDENTIALS = credentialsId('dockerhub')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
-        DOCKER_REGISTRY = 'docker.io/rpdharanidhar/devops-integration/'
+        // DOCKER_REGISTRY = 'docker.io/rpdharanidhar/devops-integration/'
+        DOCKER_REGISTRY = 'http://localhost:54686/'
     }
     
     stages {
@@ -102,7 +103,7 @@ pipeline {
         stage('Push Docker Image to Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://docker.io/rpdharanidhar/devops-integration/', dockerhub){
+                    docker.withRegistry('http://localhost:54686/', dockerhub){
                     // docker.withRegistry('https://index.docker.io/v1/', dockerhub) 
                        // docker.image("${DOCKER_IMAGE_NAME}").push("${env.DOCKER_HUB_REPO}:${env.BUILD_NUMBER}")
                         docker.image('rpdharanidhar/devops-integration').push('latest')
