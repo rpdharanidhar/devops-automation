@@ -95,9 +95,10 @@ pipeline {
         // }
         stage('Login to Docker Registry') {
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY'
-                }
+                // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
+                // }
+                bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
             }
         }
         stage('Push Docker Image to Hub') {
@@ -115,7 +116,7 @@ pipeline {
             steps {
                 script {
                     //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    sh 'docker run --name rpdharanidhar/devops-integration -p 8080:80 -d nginx'
+                    bat 'docker run --name rpdharanidhar/devops-integration -p 8080:80 -d nginx'
                 }
             }
         }
