@@ -21,7 +21,7 @@ pipeline {
                     // sshagent(['azure-vm']) {
                         // Use SSH to connect to the Azure VM and execute a command
                         // sshCommand remote: "ubuntu@${AZURE_VM_IP}", command: 'echo Hello from Jenkins'
-                    sh 'scp -r *  azureadmin@172.208.57.242:/var/www/html/', credentialsId: 'azure-vm'
+                    sh 'scp -r *  azureadmin@172.208.57.242:/var/www/html/', credentialsId: 'azure-vm-pass'
                     
                 }
             }
