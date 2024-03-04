@@ -110,14 +110,14 @@ pipeline {
                 //         docker.image('rpdharanidhar/devops-integration').push('latest')
                 //     }
                 // }
-                bat 'docker push rpdharanidhar/devops-integration:v1.0'
+                bat 'docker push rpdharanidhar/devops-integration'
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
                     //docker.image("testdemo-jenkins").run("-p 8080:8080")
-                    bat 'docker run --name rpdharanidhar/devops-integration -p 8080:80 -d nginx'
+                    bat 'docker run --name testdemo-jenkins -p 8080:80 -d nginx'
                 }
             }
         }
