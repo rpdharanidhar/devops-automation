@@ -6,12 +6,12 @@ pipeline {
     //     DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
     //     DOCKER_HUB_REPO = "rpdharanidhar"
     // }
-    environment {
-        // Define the Azure VM details
-        AZURE_VM_IP = '172.208.57.242'
-        AZURE_VM_USERNAME = 'admin'
-        AZURE_VM_PRIVATE_KEY = credentialsId('azure-vm')
-    }
+    // environment {
+    //     // Define the Azure VM details
+    //     AZURE_VM_IP = '172.208.57.242'
+    //     AZURE_VM_USERNAME = 'admin'
+    //     AZURE_VM_PRIVATE_KEY = credentialsId('azure-vm')
+    // }
    
     stages {
         // stage('Connect to Azure VM') {
