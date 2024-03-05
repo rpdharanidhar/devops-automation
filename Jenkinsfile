@@ -73,6 +73,7 @@ pipeline {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
+                    def dockerImage = docker.build('rpdharanidhar/devops-integration')
                     docker.build("rpdharanidhar/devops-integration")
                 }
             }
