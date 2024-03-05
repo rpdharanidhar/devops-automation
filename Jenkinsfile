@@ -123,7 +123,7 @@ pipeline {
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && docker push rpdharanidhar/devops-integration'
+                    bat 'docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD && docker push rpdharanidhar/devops-integration'
                 // bat 'docker push rpdharanidhar/devops-integration:latest'   
                 }
             }
