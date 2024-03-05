@@ -165,7 +165,7 @@ pipeline {
                 //         namespace: jenkinsdemo-kube
                 //     )
                 // }
-                bat 'kubectl apply -f web-deployment.yaml'
+                bat 'kubectl apply -f web-deployment.yaml --validate=flase'
             }
         }
     }
