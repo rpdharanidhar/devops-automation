@@ -139,6 +139,7 @@ pipeline {
                 // }
                 // bat 'docker stop rpdharanidhar/devops-integration:latest'
                 bat 'docker run -d rpdharanidhar/devops-integration:latest'
+                bat 'docker run -d --restart=always -e DOMAIN=cluster --name rpdharanidhar/devops-integration -p 8080:80 nginx'
             }
         }
         // // stage('Run Docker Container') {
@@ -165,7 +166,8 @@ pipeline {
                 //         namespace: jenkinsdemo-kube
                 //     )
                 // }
-                bat 'kubectl apply -f web-deployment.yaml --validate=flase'
+                bat 'kubectl create -f web-deployment.yaml'
+                bat 'kubectl apply -f web-deployment.yaml'
             }
         }
     }
