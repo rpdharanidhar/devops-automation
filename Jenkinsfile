@@ -153,20 +153,21 @@ pipeline {
         // //         }
         // //     }
         // // }
-        // stage('Deploy to Kubernetes') {
-        //     steps {
-        //         script {
-        //             // Deploy your Docker image to Kubernetes
-        //             kubernetesDeploy(
-        //                 kubeconfigId: 'your-kubeconfig-credentials-id',
-        //                 configs: 'web-deployment.yaml',
-        //                 enableConfigSubstitution: true,
-        //                 showInline: true,
-        //                 namespace: jenkinsdemo-kube
-        //             )
-        //         }
-        //     }
-        // }
+        stage('Deploy to Kubernetes') {
+            steps {
+                // script {
+                //     // Deploy your Docker image to Kubernetes
+                //     kubernetesDeploy(
+                //         kubeconfigId: 'your-kubeconfig-credentials-id',
+                //         configs: 'web-deployment.yaml',
+                //         enableConfigSubstitution: true,
+                //         showInline: true,
+                //         namespace: jenkinsdemo-kube
+                //     )
+                // }
+                bat 'kubectl apply -f web-deployment.yaml'
+            }
+        }
     }
     // post{
     //     failure {
