@@ -98,7 +98,7 @@ pipeline {
                 // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
                 // }
-                bat 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} docker.io/rpdharanidhar/devops-integration'
+                sh 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} docker.io/rpdharanidhar/devops-integration'
             }
         }
         stage('Push Docker Image to Hub') {
@@ -118,7 +118,7 @@ pipeline {
                 // bat 'docker build -t latest .'
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
-                bat "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} && docker push rpdharanidhar/devops-integration"
+                sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} && docker push rpdharanidhar/devops-integration"
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
                 
             }
@@ -136,8 +136,8 @@ pipeline {
                 //     // rpdharanidhar/devops-integration:latest
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
-                bat 'docker stop rpdharanidhar/devops-integration:latest'
-                bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration:latest'
+                sh 'docker stop rpdharanidhar/devops-integration:latest'
+                sh 'docker run -d -p 8080:80 rpdharanidhar/devops-integration:latest'
             }
         }
         // // stage('Run Docker Container') {
