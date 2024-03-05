@@ -102,7 +102,7 @@ pipeline {
                 // }
                 // bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
                 // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                bat 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+                bat 'docker login -u rpdharanidhar -p dharanirp1482'
                 // }
             }
         }
@@ -126,7 +126,7 @@ pipeline {
                 // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                 bat 'echo $DOCKER_USERNAME'
                 bat 'echo $DOCKER_PASSWORD'
-                bat 'docker login -u rpdharanidhar --password-stdin $DOCKER_PASSWORD && docker push rpdharanidhar/devops-integration'
+                bat 'docker login -u rpdharanidhar -p dharanirp1482 && docker push rpdharanidhar/devops-integration'
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
                 // }
             }
