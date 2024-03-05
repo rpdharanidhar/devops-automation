@@ -174,8 +174,12 @@ pipeline {
                 // script {
                 //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
                 // }
-                bat 'kubectl apply -f web-deployment.yaml'
-                bat 'kubectl get pods'
+                script{
+                    sh 'kubectl apply -f web-deployment.yaml'
+                    sh 'kubectl get pods'
+                }
+                // bat 'kubectl apply -f web-deployment.yaml'
+                // bat 'kubectl get pods'
             }
         }
     }
