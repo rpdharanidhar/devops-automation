@@ -17,7 +17,6 @@ spec:
         image: rpdharanidhar/devops-integration:latest
         ports:
         - containerPort: 80
-      restartPolicy: Never
 
 ---
 
