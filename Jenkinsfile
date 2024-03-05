@@ -178,8 +178,9 @@ pipeline {
                     sh 'kubectl apply -f web-deployment.yaml'
                     sh 'kubectl get pods'
                 }
-                // bat 'kubectl apply -f web-deployment.yaml'
+                // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
                 // bat 'kubectl get pods'
+                // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
             }
         }
     }
