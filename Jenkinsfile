@@ -137,7 +137,7 @@ pipeline {
                 //     // rpdharanidhar/devops-integration:latest
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
-                bat 'docker stop rpdharanidhar/devops-integration:latest'
+                // bat 'docker stop rpdharanidhar/devops-integration:latest'
                 bat 'docker run -d -p 8080:80 rpdharanidhar/devops-integration:latest'
             }
         }
