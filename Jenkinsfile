@@ -98,7 +98,7 @@ pipeline {
                 // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
                 // }
-                sh 'docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD} docker.io/rpdharanidhar/devops-integration'
+                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
             }
         }
         stage('Push Docker Image to Hub') {
