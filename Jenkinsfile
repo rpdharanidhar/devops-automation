@@ -12,13 +12,13 @@ pipeline {
     //     AZURE_VM_USERNAME = 'admin'
     //     AZURE_VM_PRIVATE_KEY = credentialsId('azure-vm')
     // }
-    environment {
+    environment{
         DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
         KUBE_NAMESPACE = 'jenkinsdemo-kube'
-        // DOCKER_PASSWORD = credentials('docker-pass-txt')
-        DOCKER_PASSWORD = 'dharanirp1482'
-        // DOCKER_USERNAME = credentials('docker-username-txt')
-        DOCKER_USERNAME = 'rpdharanidhar'
+        DOCKER_PASSWORD = credentials('docker-pass-txt')
+        // DOCKER_PASSWORD = 'dharanirp1482'
+        DOCKER_USERNAME = credentials('docker-username-txt')
+        // DOCKER_USERNAME = 'rpdharanidhar'
         // DOCKER_CREDENTIALS = credentialsId('dockerhub')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
@@ -99,7 +99,7 @@ pipeline {
                 // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                 //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
                 // }
-                bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
+                bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
             }
         }
         stage('Push Docker Image to Hub') {
@@ -119,7 +119,7 @@ pipeline {
                 // bat 'docker build -t latest .'
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
-                bat 'docker login -u rpdharanidhar -p dharanirp1482 && docker push rpdharanidhar/devops-integration'
+                bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD && docker push rpdharanidhar/devops-integration'
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
                 
             }
