@@ -138,8 +138,8 @@ pipeline {
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
                 // bat 'docker stop rpdharanidhar/devops-integration:latest'
-                // bat 'docker run -d rpdharanidhar/devops-integration:latest'
-                bat 'docker run -d --restart=always -e DOMAIN=cluster --name rpdharanidhar/devops-integration -p 8080:80 nginx'
+                bat 'docker run -d rpdharanidhar/devops-integration:latest'
+                // bat 'docker run -d --restart=always -e DOMAIN=cluster --name rpdharanidhar/devops-integration -p 8080:80 nginx'
             }
         }
         // // stage('Run Docker Container') {
