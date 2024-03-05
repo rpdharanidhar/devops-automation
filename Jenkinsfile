@@ -16,10 +16,10 @@ pipeline {
     environment{
         DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
         KUBE_NAMESPACE = 'jenkinsdemo-kube'
-        DOCKER_PASSWORD = credentials('docker-password')
-        // DOCKER_PASSWORD = 'dharanirp1482'
-        DOCKER_USERNAME = credentials('docker-username')
-        // DOCKER_USERNAME = 'rpdharanidhar'
+        // DOCKER_PASSWORD = credentials('docker-password')
+        DOCKER_PASSWORD = 'dharanirp1482'
+        // DOCKER_USERNAME = credentials('docker-username')
+        DOCKER_USERNAME = 'rpdharanidhar'
         // DOCKER_CREDENTIALS = credentialsId('dockerhub')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
