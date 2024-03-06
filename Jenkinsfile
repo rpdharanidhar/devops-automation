@@ -186,6 +186,8 @@ pipeline {
                     sh 'kubectl create -f web-deployment.yaml'
                     sh 'kubectl apply -f web-deployment.yaml'
                     sh 'kubectl get pods'
+                    // py -m http.server 8000 
+                    // curl http://host.docker.internal:8000
                 }
                 // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
                 // bat 'kubectl get pods'
