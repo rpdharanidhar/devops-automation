@@ -16,10 +16,10 @@ pipeline {
     environment{
         DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
         KUBE_NAMESPACE = 'jenkinsdemo-kube'
-        // DOCKER_PASSWORD = credentials('docker-password')
-        DOCKER_PASSWORD = 'dharanirp1482'
-        // DOCKER_USERNAME = credentials('docker-username')
-        DOCKER_USERNAME = 'rpdharanidhar'
+        DOCKER_PASSWORD = credentials('docker-password')
+        // DOCKER_PASSWORD = 'dharanirp1482'
+        DOCKER_USERNAME = credentials('docker-username')
+        // DOCKER_USERNAME = 'rpdharanidhar'
         // DOCKER_CREDENTIALS = credentialsId('dockerhub')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
@@ -74,8 +74,8 @@ pipeline {
             steps {
                 script {
                      //sh 'docker build -t testdemo-jenkins https://github.com/rpdharanidhar/devops-automation.git#rpdharanidhar/devops-integration', branch: 'main', credentialsId: 'polar-git-credentials'
-                    def dockerImage = docker.build('rpdharanidhar/devops-integration')
-                    docker.build("rpdharanidhar/devops-integration")
+                    def dockerImage = docker.build("${DOCKER_IMAGE_NAME}")
+                    docker.build("${DOCKER_IMAGE_NAME}")
                 }
             }
         }
@@ -102,7 +102,7 @@ pipeline {
                 // }
                 // bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
                 // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                bat 'docker login -u rpdharanidhar -p dharanirp1482'
+                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                 // }
             }
         }
@@ -124,9 +124,9 @@ pipeline {
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
                 // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                bat 'echo $DOCKER_USERNAME'
-                bat 'echo $DOCKER_PASSWORD'
-                bat 'docker login -u rpdharanidhar -p dharanirp1482 && docker push rpdharanidhar/devops-integration'
+                bat "echo ${DOCKER_USERNAME}"
+                bat "echo ${DOCKER_PASSWORD}"
+                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push rpdharanidhar/devops-integration"
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
                 // }
             }
@@ -146,7 +146,7 @@ pipeline {
                 //     // sh "docker run -d --name ${containerName} ${imageName}"
                 // }
                 // bat 'docker stop rpdharanidhar/devops-integration:latest'
-                bat 'docker run -d rpdharanidhar/devops-integration:latest'
+                bat "docker run -d ${DOCKER_IMAGE}"
                 // bat 'docker run -d --restart=always -e DOMAIN=cluster --name rpdharanidhar/devops-integration -p 8080:80 nginx'
             }
         }
@@ -162,43 +162,43 @@ pipeline {
         // //         }
         // //     }
         // // }
-        stage('Deploy to Kubernetes') {
-            steps {
-                // script {
-                //     // Deploy your Docker image to Kubernetes
-                //     kubernetesDeploy(
-                //         kubeconfigId: 'your-kubeconfig-credentials-id',
-                //         configs: 'web-deployment.yaml',
-                //         enableConfigSubstitution: true,
-                //         showInline: true,
-                //         namespace: jenkinsdemo-kube
-                //     )
-                // }
-                // bat 'kubectl create -f web-deployment.yaml'
-                // bat 'kubectl apply -f web-deployment.yaml'
-                // script{
-                //     sh 'kubectl apply -f web-deployment.yaml'
-                // }
-                // script {
-                //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
-                // }
-                // script{
-                //     // sh 'kubectl create -f web-deployment.yaml'
-                //     sh 'cd /d D:\DevOps\kube\training\kubetst\demo'
-                //     sh 'kubectl apply -f web-deployment.yaml'
-                //     sh 'kubectl get pods'
-                //     // py -m http.server 8000 
-                //     // curl http://host.docker.internal:8000
-                // }
-                // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
-                // bat 'kubectl get pods'
-                // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
-                bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
-                // bat 'kubectl apply -f web-deployment.yaml'
-                bat 'kubectl get pods'
+        // stage('Deploy to Kubernetes') {
+        //     steps {
+        //         // script {
+        //         //     // Deploy your Docker image to Kubernetes
+        //         //     kubernetesDeploy(
+        //         //         kubeconfigId: 'your-kubeconfig-credentials-id',
+        //         //         configs: 'web-deployment.yaml',
+        //         //         enableConfigSubstitution: true,
+        //         //         showInline: true,
+        //         //         namespace: jenkinsdemo-kube
+        //         //     )
+        //         // }
+        //         // bat 'kubectl create -f web-deployment.yaml'
+        //         // bat 'kubectl apply -f web-deployment.yaml'
+        //         // script{
+        //         //     sh 'kubectl apply -f web-deployment.yaml'
+        //         // }
+        //         // script {
+        //         //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
+        //         // }
+        //         // script{
+        //         //     // sh 'kubectl create -f web-deployment.yaml'
+        //         //     sh 'cd /d D:\DevOps\kube\training\kubetst\demo'
+        //         //     sh 'kubectl apply -f web-deployment.yaml'
+        //         //     sh 'kubectl get pods'
+        //         //     // py -m http.server 8000 
+        //         //     // curl http://host.docker.internal:8000
+        //         // }
+        //         // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
+        //         // bat 'kubectl get pods'
+        //         // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
+        //         bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
+        //         // bat 'kubectl apply -f web-deployment.yaml'
+        //         bat 'kubectl get pods'
             
-            }
-        }
+        //     }
+        // }
     }
     // post{
     //     failure {
