@@ -162,43 +162,43 @@ pipeline {
         // //         }
         // //     }
         // // }
-        // stage('Deploy to Kubernetes') {
-        //     steps {
-        //         // script {
-        //         //     // Deploy your Docker image to Kubernetes
-        //         //     kubernetesDeploy(
-        //         //         kubeconfigId: 'your-kubeconfig-credentials-id',
-        //         //         configs: 'web-deployment.yaml',
-        //         //         enableConfigSubstitution: true,
-        //         //         showInline: true,
-        //         //         namespace: jenkinsdemo-kube
-        //         //     )
-        //         // }
-        //         // bat 'kubectl create -f web-deployment.yaml'
-        //         // bat 'kubectl apply -f web-deployment.yaml'
-        //         // script{
-        //         //     sh 'kubectl apply -f web-deployment.yaml'
-        //         // }
-        //         // script {
-        //         //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
-        //         // }
-        //         // script{
-        //         //     // sh 'kubectl create -f web-deployment.yaml'
-        //         //     sh 'cd /d D:\DevOps\kube\training\kubetst\demo'
-        //         //     sh 'kubectl apply -f web-deployment.yaml'
-        //         //     sh 'kubectl get pods'
-        //         //     // py -m http.server 8000 
-        //         //     // curl http://host.docker.internal:8000
-        //         // }
-        //         // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
-        //         // bat 'kubectl get pods'
-        //         // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
-        //         bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
-        //         // bat 'kubectl apply -f web-deployment.yaml'
-        //         bat 'kubectl get pods'
+        stage('Deploy to Kubernetes') {
+            steps {
+                // script {
+                //     // Deploy your Docker image to Kubernetes
+                //     kubernetesDeploy(
+                //         kubeconfigId: 'your-kubeconfig-credentials-id',
+                //         configs: 'web-deployment.yaml',
+                //         enableConfigSubstitution: true,
+                //         showInline: true,
+                //         namespace: jenkinsdemo-kube
+                //     )
+                // }
+                // bat 'kubectl create -f web-deployment.yaml'
+                // bat 'kubectl apply -f web-deployment.yaml'
+                // script{
+                //     sh 'kubectl apply -f web-deployment.yaml'
+                // }
+                // script {
+                //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
+                // }
+                // script{
+                //     // sh 'kubectl create -f web-deployment.yaml'
+                //     sh 'cd /d D:\DevOps\kube\training\kubetst\demo'
+                //     sh 'kubectl apply -f web-deployment.yaml'
+                //     sh 'kubectl get pods'
+                //     // py -m http.server 8000 
+                //     // curl http://host.docker.internal:8000
+                // }
+                // bat 'kubectl apply -f C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"'
+                // bat 'kubectl get pods'
+                // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
+                bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
+                // bat 'kubectl apply -f web-deployment.yaml'
+                bat 'kubectl get pods'
             
-        //     }
-        // }
+            }
+        }
     }
     // post{
     //     failure {
