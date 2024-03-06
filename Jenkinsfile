@@ -183,7 +183,7 @@ pipeline {
                 //     sh "kubectl --kubeconfig=build-spec.yaml apply -f web-deployment.yaml"
                 // }
                 script{
-                    sh 'kubectl create -f web-deployment.yaml'
+                    // sh 'kubectl create -f web-deployment.yaml'
                     sh 'kubectl apply -f web-deployment.yaml'
                     sh 'kubectl get pods'
                     // py -m http.server 8000 
