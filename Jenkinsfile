@@ -184,6 +184,7 @@ pipeline {
                 // }
                 script{
                     // sh 'kubectl create -f web-deployment.yaml'
+                    sh 'cd /d D:\DevOps\kube\training\kubetst\demo'
                     sh 'kubectl apply -f web-deployment.yaml'
                     sh 'kubectl get pods'
                     // py -m http.server 8000 
