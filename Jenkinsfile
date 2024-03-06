@@ -194,7 +194,7 @@ pipeline {
                 // bat 'kubectl get pods'
                 // "C:\ProgramData\Jenkins\.jenkins\workspace\test01\devops-integration\web-deployment.yaml"
                 bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
-                bat 'kubectl apply -f web-deployment.yaml'
+                // bat 'kubectl apply -f web-deployment.yaml'
                 bat 'kubectl get pods'
             
             }
