@@ -35,17 +35,17 @@ pipeline {
                 bat "docker run -d ${DOCKER_IMAGE}"
             }
         }
-        // stage('Deploy to Kubernetes') {
-        //     steps {
-        //         bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
-        //         bat 'kubectl apply -f web-deployment.yaml'
-        //         bat 'kubectl port-forward deployment/nginx-deployment 8080:80'
-        //         bat 'kubectl get pods'
-        //     }
-        // }
+        stage('Deploy to Kubernetes') {
+            steps {
+                bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
+                bat 'kubectl apply -f web-deployment.yaml'
+                bat 'kubectl port-forward deployment/nginx-deployment 8080:80'
+                bat 'kubectl get pods'
+            }
+        }
         stage('Cleaning up') {
             steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
+                bat "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
