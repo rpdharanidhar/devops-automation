@@ -2,13 +2,13 @@ pipeline {
     agent any
     environment{
         registry = "rpdharanidhar/devops-integration"
-        DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
-        KUBE_NAMESPACE = 'jenkinsdemo-kube'
+        DOCKER_IMAGE = "rpdharanidhar/devops-integration:latest"
+        KUBE_NAMESPACE = "jenkinsdemo-kube"
         DOCKER_PASSWORD = credentials('docker-password')
         DOCKER_USERNAME = credentials('docker-username')
         DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
         DOCKER_HUB_REPO = "rpdharanidhar"
-        DOCKER_REGISTRY = 'http://localhost:54686/'
+        DOCKER_REGISTRY = "rpdharanidhar/devops-integration"
     }
     
     stages {
