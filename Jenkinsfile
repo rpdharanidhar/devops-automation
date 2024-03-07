@@ -95,17 +95,17 @@ pipeline {
         //         bat 'docker login -u rpdharanidhar -p ${docker-pass-txt} ${env.DOCKER_REGISTRY}'
         //     }
         // }
-        stage('Login to Docker Registry') {
-            steps{
-                // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
-                // }
-                // bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
-                // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                // }
-            }
-        }
+        // stage('Login to Docker Registry') {
+        //     steps{
+        //         // withCredentials([usernamePassword(credentialsId: 'docker-registry-username-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+        //         //     bat 'docker login -u rpdharanidhar -p dharanirp1482 docker.io/rpdharanidhar/devops-integration'
+        //         // }
+        //         // bat 'docker login -u env.DOCKER_USERNAME -p env.DOCKER_PASSWORD docker.io/rpdharanidhar/devops-integration'
+        //         // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+        //         bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+        //         // }
+        //     }
+        // }
         stage('Push Docker Image to Hub') {
             steps {
                 // script {
@@ -124,8 +124,8 @@ pipeline {
                 // bat 'docker tag rpdharanidhar/devops-integration devops-integration:latest'
                 // // bat 'docker push devops-integration:latest'
                 // withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials-id', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                bat "echo ${DOCKER_USERNAME}"
-                bat "echo ${DOCKER_PASSWORD}"
+                // bat "echo ${DOCKER_USERNAME}"
+                // bat "echo ${DOCKER_PASSWORD}"
                 bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push rpdharanidhar/devops-integration"
                 // bat 'docker push rpdharanidhar/devops-integration:latest'
                 // }
