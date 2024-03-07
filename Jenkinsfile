@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                bat "docker run -d ${DOCKER_IMAGE}"
+                bat "docker run -d ${DOCKER_IMAGE} -p 8080:80"
             }
         }
         // stage('Deploy to Kubernetes') {
