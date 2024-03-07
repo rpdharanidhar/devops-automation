@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment{
+        registry = "rpdharanidhar/devops-integration"
         DOCKER_IMAGE = 'rpdharanidhar/devops-integration:latest'
         KUBE_NAMESPACE = 'jenkinsdemo-kube'
         DOCKER_PASSWORD = credentials('docker-password')
