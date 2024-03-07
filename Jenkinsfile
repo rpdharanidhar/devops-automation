@@ -21,6 +21,7 @@ pipeline {
             steps {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage.inside("-p ${8080}:${80}")
                 }
             }
         }
@@ -32,7 +33,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                docker.image("rpdharanidhar/devops-integration:latest").withRun('-p 8080:80')
+                bat "docker run -d ${DOCKER_IMAGE}"
             }
         }
         // stage('Deploy to Kubernetes') {
