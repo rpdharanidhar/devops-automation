@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  annotations:
-    argocd.argoproj.io/sync-options: Validate=false
 spec:
   replicas: 3
   selector:
@@ -19,7 +17,7 @@ spec:
         image: rpdharanidhar/devops-integration:latest
         ports:
         - containerPort: 80
-      # restartPolicy: Never
+      restartPolicy: Always
 
 ---
 
