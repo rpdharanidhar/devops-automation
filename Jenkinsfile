@@ -20,7 +20,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    (dockerImage = docker.build registry + ":$BUILD_NUMBER").withRun('-p 8080:8080')
+                    (dockerImage = docker.build registry + ":$BUILD_NUMBER").withRun('-p 8080:80')
                 }
             }
         }
