@@ -19,8 +19,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // def dockerImage = docker.build("${DOCKER_IMAGE_NAME}")
-                    // docker.build("${DOCKER_IMAGE_NAME}")
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
