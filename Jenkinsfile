@@ -40,12 +40,8 @@ pipeline {
                 script {
                     bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
                     bat 'kubectl apply -f web-deployment.yaml --validate=false'
-                    if (errorLevel != 0) {
-                        echo "Failed to apply web-deployment.yaml"
-                        currentBuild.result = 'FAILURE'
-                    } else {
-                        bat 'kubectl port-forward deployment/nginx-deployment 8080:80'
-                        bat 'kubectl get pods'
+                    bat 'kubectl port-forward deployment/nginx-deployment 8080:80'
+                    bat 'kubectl get pods'
                     }
                 }
             }
