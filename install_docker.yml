@@ -7,6 +7,9 @@
     ansible_become_pass: "mg"
   become: true
   tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
     - name: Install required packages
       apt:
         name:
@@ -24,14 +27,20 @@
 
     - name: Add Docker repository
       apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu/dists/focal/stable
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state: present
 
     - name: Update apt package cache
       apt:
         update_cache: yes
+        cache_valid_time: 3600
 
-    - name: Install Docker
+    - name: Install Docker CE
       apt:
-        name: docker-ce docker-ce-cli containerd.io
+        name: docker-ce
+        state: present
+
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
         state: present
