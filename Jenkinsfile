@@ -37,12 +37,10 @@ pipeline {
         }
         stage('Deploy to Kubernetes') {
             steps {
-                script {
                     bat 'cd /d D:/DevOps/kube/training/kubetst/demo'
                     bat 'kubectl apply -f web-deployment.yaml --validate=false'
                     bat 'kubectl port-forward deployment/nginx-deployment 8080:80'
                     bat 'kubectl get pods'
-                    }
                 }
             }
         }
