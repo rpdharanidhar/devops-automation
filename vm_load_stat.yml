@@ -1,0 +1,16 @@
+---
+- name: Check VM load
+  hosts: all
+  vars:
+    ansible_become: true
+    ansible_become_method: sudo
+    ansible_become_pass: "mg"
+  become: true
+  tasks:
+    - name: Get load averages
+      shell: uptime
+      register: uptime_output
+
+    - name: Display load averages
+      debug:
+        msg: "{{ uptime_output.stdout }}"
