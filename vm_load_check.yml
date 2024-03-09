@@ -7,6 +7,9 @@
     ansible_become_pass: "mg"
   become: true
   tasks:
+    - name: Ping hosts
+      ping: all
+
     - name: Get load averages
       shell: uptime
       register: uptime_output
