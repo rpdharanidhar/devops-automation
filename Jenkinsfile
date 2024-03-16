@@ -1,16 +1,13 @@
 pipeline {
     agent any
-    environment{
+    environment {
         registry = "rpdharanidhar/devops-task01"
         DOCKER_IMAGE = "rpdharanidhar/devops-task01:latest"
         KUBE_NAMESPACE = "jenkinsdemo-kube"
         DOCKER_PASSWORD = credentials('docker-password')
         DOCKER_USERNAME = credentials('docker-username')
-        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-task01"
-        DOCKER_HUB_REPO = "rpdharanidhar"
-        DOCKER_REGISTRY = "rpdharanidhar/devops-task01"
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
@@ -26,9 +23,9 @@ pipeline {
         }
         stage('Push Docker Image to Hub') {
             steps {
-                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push rpdharanidhar/devops-task01:latest"
+                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push ${DOCKER_IMAGE}"
             }
-        
+
         }
         stage('Run Docker Container') {
             steps {
@@ -44,8 +41,8 @@ pipeline {
         //     }
         // }
         stage('Cleaning up') {
-            steps{
-                bat "docker rmi $registry:$BUILD_NUMBER"
+            steps {
+                bat "docker rmi ${registry}:${BUILD_NUMBER}"
             }
         }
     }
