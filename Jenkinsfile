@@ -19,7 +19,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t rpdharanidhar/devops-task01:latest ."
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
         stage('Push Docker Image to Hub') {
