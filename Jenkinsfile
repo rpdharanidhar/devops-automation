@@ -29,7 +29,11 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                bat "docker run -d -p 8080:80 ${DOCKER_IMAGE}"
+                script {
+                    bat "docker run -d -p 8080:80 ${DOCKER_IMAGE}"
+                    def containerId = bat(script: 'docker ps -q --filter ancestor=${DOCKER_IMAGE}', returnStdout: true).trim()
+                    echo "Container ID: ${containerId}"
+                }
             }
         }
         // stage('Deploy to Kubernetes') {
@@ -43,6 +47,7 @@ pipeline {
         stage('Cleaning up') {
             steps {
                 bat "docker rmi ${registry}:${BUILD_NUMBER}"
+                bat "docker rm ${containerId}"
             }
         }
     }
