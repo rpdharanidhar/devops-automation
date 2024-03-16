@@ -42,7 +42,7 @@ pipeline {
         // }
         stage('Cleaning up') {
             steps {
-                bat "docker rmi ${registry}:${BUILD_NUMBER}"
+                bat "docker rmi ${registry}:${BUILD_NUMBER} && docker rm ${registry}:${BUILD_NUMBER}"
             }
         }
     }
