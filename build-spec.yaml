@@ -8,11 +8,11 @@ phases:
   build:
     commands:
       - echo "Building the Docker image"
-      - docker build -t rpdharanidhar/devops-integration:latest .
+      - docker build -t rpdharanidhar/devops-task01:latest .
   post_build:
     commands:
       - echo "Pushing the Docker image to Docker Hub"
-      - docker push rpdharanidhar/devops-integration:latest
+      - docker push rpdharanidhar/devops-task01:latest
 
 credentials:
   username: "rpdharanidhar"

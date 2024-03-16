@@ -5,16 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: rpdharanidhar/devops-integration:latest
+    image: rpdharanidhar/devops-task01:latest
 
   push:
     image: nginx
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sh -c "docker push rpdharanidhar/devops-integration:latest"
+    command: sh -c "docker push rpdharanidhar/devops-task01:latest"
 
   pull:
     image: nginx
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sh -c "docker pull rpdharanidhar/devops-integration:latest"
+    command: sh -c "docker pull rpdharanidhar/devops-task01:latest"

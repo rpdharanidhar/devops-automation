@@ -1,20 +1,20 @@
 pipeline {
     agent any
     environment{
-        registry = "rpdharanidhar/devops-integration"
-        DOCKER_IMAGE = "rpdharanidhar/devops-integration:latest"
+        registry = "rpdharanidhar/devops-task01"
+        DOCKER_IMAGE = "rpdharanidhar/devops-task01:latest"
         KUBE_NAMESPACE = "jenkinsdemo-kube"
         DOCKER_PASSWORD = credentials('docker-password')
         DOCKER_USERNAME = credentials('docker-username')
-        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-integration"
+        DOCKER_IMAGE_NAME = "rpdharanidhar/devops-task01"
         DOCKER_HUB_REPO = "rpdharanidhar"
-        DOCKER_REGISTRY = "rpdharanidhar/devops-integration"
+        DOCKER_REGISTRY = "rpdharanidhar/devops-task01"
     }
     
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/rpdharanidhar/devops-automation.git', branch: 'main', credentialsId: 'git-credentials'
+                git url: 'https://github.com/rpdharanidhar/devops-task01.git', branch: 'main', credentialsId: 'git-credentials'
             }
         }
         stage('Build Docker Image') {
@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Push Docker Image to Hub') {
             steps {
-                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push rpdharanidhar/devops-integration"
+                bat "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD} && docker push rpdharanidhar/devops-task01"
             }
         
         }

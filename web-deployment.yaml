@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rpdharanidhar/devops-integration:latest
+        image: rpdharanidhar/devops-task01:latest
         ports:
         - containerPort: 80
-      # restartPolicy: Never
+      restartPolicy: Never
 
 ---
 
