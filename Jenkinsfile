@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Run Docker Container') {
             steps {
-                bat "docker run devops-task01 rpdharanidhar/devops-task01:lates -d -p 8080:80 ${DOCKER_IMAGE}"
+                bat "docker run devops-task01 rpdharanidhar/devops-task01:latest -d -p 8080:80 ${DOCKER_IMAGE}"
             }
         }
         // stage('Deploy to Kubernetes') {
